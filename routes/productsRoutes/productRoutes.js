@@ -1,5 +1,6 @@
 const express = require('express')
 const productRoute = express.Router()
+const db = require('../../services/db')
 const fs = require('fs')
 
 
