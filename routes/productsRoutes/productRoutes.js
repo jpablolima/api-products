@@ -1,11 +1,26 @@
 const express = require('express')
 const productRoute = express.Router()
 const db = require('../../services/db')
+const productModel = require('../../model/ProductModel')
 const fs = require('fs')
 
 
+
 productRoute.get('/', (req, res) => {
-    res.send('Home')
+    try {
+        const Produto = new productModel({
+            nome: "Produto 1",
+            valorCompra: '10,50',
+            valorVenda: '50,12',
+            quantidade: 1000
+        })
+
+        Produto.save()
+        res.send('Cadastro do produto realizado com sucesso')
+    } catch {
+
+        res.send('Erro  ao realizar o cadastro do produto')
+    }
 })
 
 productRoute.get('/produtos', (req, res) => {
