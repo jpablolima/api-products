@@ -66,5 +66,13 @@ productRoute.put('/produto/edit/:id', (req, res) => {
         .catch((err) => { res.send('Error ao atualizar o produto!' + err) })
 })
 
+productRoute.delete('/produto/delete/:id', (req, res) => {
+    const idProduct = req.params.id
+
+    productModel.deleteOne({ _id: idProduct })
+        .then(() => { res.send('Produto deletado com sucesso!') })
+        .catch((err) => { res.send('Erro ao deletar produto' + err) })
+})
+
 
 module.exports = productRoute;
