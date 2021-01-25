@@ -43,10 +43,28 @@ productRoute.post('/produto/addnew', (req, res) => {
         res.send('Error ao cadastrar produto' + err)
     })
 
-
 })
 
+productRoute.put('/produto/edit/:id', (req, res) => {
+    const idProduct = req.params.id
 
+    if (idProduct == "" || idProduct == null || idProduct == undefined) {
+        res.send('Id não encontrado, favor informar id corretamente')
+        return
+    }
+
+
+    const newProduct = {
+        nome: req.body.nome,
+        valorCompra: req.body.valorCompra,
+        valorVenda: req.body.valorVenda,
+        quantidade: req.body.quantidade
+    }
+
+    productModel.update({ _id: idProduct }, newProduct)
+        .then(() => { res.send('Produto atualizado com Sucesso!') })
+        .catch((err) => { res.send('Error ao atualizar o produto!' + err) })
+})
 
 
 module.exports = productRoute;
